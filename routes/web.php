@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/Admin','AdminController@admin');
+
+
+
+Route::get('/','UserController@login');
+Route::post('/doLogin','UserController@doLogin');
+
+Route::get('/logout',function(){
+	Auth::logout();
+	return redirect('/');
 });
