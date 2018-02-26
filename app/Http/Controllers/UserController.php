@@ -19,9 +19,12 @@ class UserController extends Controller
     }
 
     public function doLogin(Request $req){
-    	if(Auth::attempt(['username'=> $req->username,'password'=> $req->password])){
-          	return redirect('/Admin');
-        }
+    	// if(Auth::attempt(['username'=> $req->username,'password'=> $req->password])){
+     //      	return redirect('/Admin');
+     //    }
+    	date_default_timezone_set('Asia/Singapore');
+        echo $date = date('Y-m-d H:i:s');
+        die();
         return redirect('/');
     }
 }

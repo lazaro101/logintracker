@@ -74,7 +74,7 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="username" placeholder="username">
+            <input type="text" name="username" placeholder="username" tabindex="1">
           </div>
         </div>
         <button type="submit" class="ui fluid large teal submit button" value="login" name="submit">Login</button>
@@ -85,7 +85,7 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" tabindex="2">
           </div>
         </div>
         <button type="submit" class="ui fluid large teal submit button" value="logout" name="submit">Logout</button>
