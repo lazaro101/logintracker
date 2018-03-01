@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class OjtLogs extends Model
 {
-    protected $table = 'users';
-    protected $primaryKey = 'id';
+    protected $table = 'ojt_logs';
     public $timestamps = false; 
 
     public function ojtprofile(){

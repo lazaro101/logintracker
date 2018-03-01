@@ -16,6 +16,21 @@
 // });
 
 Route::get('/Admin','AdminController@admin');
+Route::get('/AdminLogin','UserController@showAdminLogin');
+Route::post('/doLoginAdmin','UserController@doLoginAdmin');
+
+Route::get('/Admin/Schedule','AdminController@Schedule');
+
+
+Route::get('/Admin/Trainee','AdminController@Trainee');
+Route::get('/Admin/Trainee/{id}', ['uses' => 'AdminController@TraineeInfo']);
+Route::get('/getTrainee','AdminController@getTrainee');
+Route::post('/addTrainee','AdminController@addTrainee');
+Route::post('/editTrainee','AdminController@editTrainee');
+Route::post('/delTrainee','AdminController@delTrainee');
+
+
+Route::get('/Admin/Reports','AdminController@Reports');
 
 
 
@@ -26,3 +41,7 @@ Route::get('/logout',function(){
 	Auth::logout();
 	return redirect('/');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

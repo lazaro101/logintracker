@@ -5,11 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
  
-  <title>Login</title>
+  <title>Admin Login</title>
 
-  <script src="Semantic-UI-CSS-master/jquery-3.3.1.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
-  <script src="Semantic-UI-CSS-master/semantic.min.js"></script>
+  <script src="{{asset('Semantic-UI-CSS-master/jquery-3.3.1.min.js')}}"></script>
+  <link rel="stylesheet" type="text/css" href="{{asset('Semantic-UI-CSS-master/semantic.min.css')}}">
+  <script src="{{asset('Semantic-UI-CSS-master/semantic.min.js')}}"></script>
 
   <style type="text/css">
     body {
@@ -67,46 +67,35 @@
 <body>
 
 <div class="ui middle aligned center aligned grid">
-  <div class="row ui form">
-    <div class="eight wide column">
-    <form method="post" action="/doLogin">
+  <div class="column">
+    <h2 class="ui icon header">
+      <i class="user secret icon"></i>
+      <div class="content">
+        Log-in as Admin
+      </div>
+    </h2>
+    <form method="post" action="/doLoginAdmin" class="ui form">
+    {{csrf_field()}}
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="username" placeholder="Username" tabindex="1">
+            <input type="text" name="username" placeholder="username" tabindex="1">
           </div>
         </div>
-        <button type="submit" class="ui fluid large teal submit button" value="login" name="submit">Login</button>
-      </div>
-    </div>
-      {{csrf_field()}}
-    <div class="eight wide column">
-      <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
             <input type="password" name="password" placeholder="Password" tabindex="2">
           </div>
         </div>
-        <button type="submit" class="ui fluid large teal submit button" value="logout" name="submit">Logout</button>
+        <button type="submit" class="ui fluid large teal submit button" value="logout" name="submit">Login</button>
       </div>
+
     </form>
-    </div>
   </div>
-
-@if(Session::has('message'))
-    <div style="position: fixed; width: 50%; height: 300px; left: 50%; top:100px; margin: 0 0 0 -25%; z-index: -1">
-      <div class="ui success message">
-        <i class="close icon"></i>
-        <div class="header">
-        {{ Session::get('message') }}
-        </div> 
-      </div>
-    </div>
-@endif
-
 </div>
+
 
 </body>
 
