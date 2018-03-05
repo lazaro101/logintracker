@@ -147,6 +147,7 @@ $(document).ready(function(){
   $('.edit').click(function(){ 
     $('#form div.header').text('Edit Trainee');
     $('#form form').trigger('reset').attr('action','/editTrainee');
+    $('#form form').form('remove fields', ['username', 'password']);
     $('#example2').calendar({
       type: 'date'
     });
@@ -178,9 +179,10 @@ $(document).ready(function(){
   });
 
   $('#form .positive.button').click(function(){
+    $('body').addClass('scrolling');
     if ($('#form form').form('is valid') == false) {
       $('#form form').form('validate form');
-      return false
+      return false;
     }
     return true;
   });

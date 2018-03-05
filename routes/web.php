@@ -14,6 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// Route::get('generate-pdf', 'AdminController@pdfview')->name('generate-pdf');
 
 Route::get('/Admin','AdminController@admin');
 Route::get('/AdminLogin','UserController@showAdminLogin');
@@ -24,6 +25,7 @@ Route::get('/Admin/Schedule','AdminController@Schedule');
 
 Route::get('/Admin/Trainee','AdminController@Trainee');
 Route::get('/Admin/Trainee/{id}', ['uses' => 'AdminController@TraineeInfo']);
+Route::get('/Admin/TraineePdf', 'AdminController@TraineePdf');
 Route::get('/getTrainee','AdminController@getTrainee');
 Route::get('/checkUsername','AdminController@checkUsername');
 Route::post('/addTrainee','AdminController@addTrainee');

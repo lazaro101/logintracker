@@ -8,6 +8,7 @@ use App\OjtLogs;
 use App\OjtProfile;
 use App\Schedule;
 use App\Users;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -53,7 +54,17 @@ class AdminController extends Controller
     public function TraineeInfo($id){
     	$info = OjtProfile::where('ojt_profile_id',$id)->first();
     	$logs = OjtLogs::where('ojt_profile_id',$id)->orderBy('dtime_in','ASC')->get();
+
     	return view('admin.traineeinfo',compact('info','logs'));
+    }
+    public function TraineePdf(Request $req){
+        if($req->has('download')){
+	    	$info = OjtProfile::where('ojt_profile_id',$req->id)->first();
+	    	$logs = OjtLogs::where('ojt_profile_id',$req->id)->orderBy('dtime_in','ASC')->get();
+        	$pdf = PDF::loadView('pdfview',compact('info','logs'));
+			return $pdf->stream('Trainee Info.pdf');
+        }
+        return redirect('/Admin/Trainee/'.$req->id);
     }
     public function Trainee(){
         $scheds = Schedule::where('deleted',0)->get();
@@ -93,6 +104,7 @@ class AdminController extends Controller
     		'mname' => $req->mname ,
     		'lname' => $req->lname ,
     		'school' => $req->school ,
+    		'schedule_id' => $req->schedule ,
     		'render_hrs' => $req->hrs ,
     		'start_date' => date_create($req->startdate)->format('Y-m-d')  ,
     	]);
@@ -106,7 +118,24 @@ class AdminController extends Controller
     }
 
     public function Reports(){
-
     	return view('admin.reports');
+    }
+
+   	public function pdfview(Request $request)
+    {
+        // $users = 'DB::table("users")->get()';
+        // view()->share('users',$users);
+
+        if($request->has('download')){
+        	// Set extra option
+        	// PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        	// // pass view file
+         //    return $pdf = PDF::loadView('pdfview');
+         //    // download pdf
+         //    return $pdf->download('pdfview.pdf');
+        	$pdf = PDF::loadView('pdfview');
+			return $pdf->stream('invoice.pdf');
+        }
+        return view('pdfview');
     }
 }

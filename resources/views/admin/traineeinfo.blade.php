@@ -52,7 +52,7 @@
 		</div>
 		<div class="column">
 			<div id="buttons">
-				<a href="" class="ui icon huge blue button"><i class="print icon"></i></a>
+				<a href="/Admin/TraineePdf?download=pdf&id={{$info->ojt_profile_id}}" target="_blank" class="ui icon huge blue button"><i class="print icon"></i></a>
 			</div>
 		</div>
 	</div>
@@ -69,7 +69,9 @@
 					</tr> 
 				</thead>
 				<tbody>
-					@php $total = 0 @endphp
+					@php 
+						$total = '00:00:00';
+					@endphp
 					@foreach($logs as $log)
 					<tr>
 						<td>{{date_create($log->dtime_in)->format('M d, Y')}}</td>
@@ -78,16 +80,18 @@
 						@php
 							$dteStart = new DateTime($log->dtime_in); 
 							$dteEnd   = new DateTime($log->dtime_out);
-							$dteDiff  = $dteStart->diff($dteEnd);  
+							$dteDiff  = $dteStart->diff($dteEnd);
+							$time = strtotime($dteDiff->format("%H:%I")) - 3600;  
+							$total = Helper::sum_the_time($total, date("H:i:s", $time));
 						@endphp
-						<td>{{$dteStart->format("H:i")}}</td>
+						<td>{{date("H \h i \m", $time)}}</td>
 					</tr>
 					@endforeach
 				</tbody>
 				<tfoot>
 					<tr>
 						<th colspan="3" class="right aligned">Total No. of Hours Rendered:</th>
-						<th>{{$total}}</th>
+						<th>{{Helper::format_total($total)}}</th>
 					</tr>
 				</tfoot>
 			</table>
