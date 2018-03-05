@@ -26,42 +26,44 @@
     }
   </style>
   <script>
-  // $(document)
-  //   .ready(function() {
-  //     $('.ui.form')
-  //       .form({
-  //         fields: {
-  //           email: {
-  //             identifier  : 'email',
-  //             rules: [
-  //               {
-  //                 type   : 'empty',
-  //                 prompt : 'Please enter your e-mail'
-  //               },
-  //               {
-  //                 type   : 'email',
-  //                 prompt : 'Please enter a valid e-mail'
-  //               }
-  //             ]
-  //           },
-  //           password: {
-  //             identifier  : 'password',
-  //             rules: [
-  //               {
-  //                 type   : 'empty',
-  //                 prompt : 'Please enter your password'
-  //               },
-  //               {
-  //                 type   : 'length[6]',
-  //                 prompt : 'Your password must be at least 6 characters'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     ;
-  //   })
-  // ;
+  $(document)
+    .ready(function() { 
+      setTimeout(function(){ $('.ui.login.message').transition('fade'); }, 5000);
+      $('.ui.form')
+        .form({
+          inline: false,
+          fields: {
+            username: {
+              identifier  : 'username',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your Username'
+                },
+                {
+                  type   : 'maxLength[6]',
+                  prompt : 'Please enter a valid length'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
   </script>
 </head>
 <body>
@@ -91,20 +93,22 @@
         </div>
         <button type="submit" class="ui fluid large teal submit button" value="logout" name="submit">Logout</button>
       </div>
+      <div class="ui error message" style="position: fixed; width: 50%; height: 150px; left: 50%; top:400px; margin: 0 0 0 -25%; z-index: -1"></div>
     </form>
     </div>
   </div>
 
 @if(Session::has('message'))
-    <div style="position: fixed; width: 50%; height: 300px; left: 50%; top:100px; margin: 0 0 0 -25%; z-index: -1">
-      <div class="ui success message">
-        <i class="close icon"></i>
-        <div class="header">
-        {{ Session::get('message') }}
-        </div> 
-      </div>
-    </div>
+<div style="position: fixed; width: 50%; height: 300px; left: 50%; top:100px; margin: 0 0 0 -25%; z-index: -1">
+  <div class="ui success message login">
+    <i class="close icon"></i>
+    <div class="header">
+    {{ Session::get('message') }}
+    </div> 
+  </div>
+</div>
 @endif
+
 
 </div>
 
