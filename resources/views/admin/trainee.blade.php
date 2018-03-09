@@ -10,7 +10,10 @@
         <i class="add icon"></i>
         ADD
       </button>
-      <table class="ui celled table">
+      <br>
+      <br>
+      <br>
+      <table class="ui celled table" id="table">
         <thead>
           <tr><th class="six wide">Name</th>
           <th class="six wide">School</th>
@@ -19,7 +22,7 @@
         <tbody>
           @foreach($ojts as $ojt)
           <tr>
-            <td>{{$ojt->fname.' '.$ojt->mname.' '.$ojt->lname}}</td>
+            <td>{{$ojt->fname.' '.substr($ojt->mname,0,1).' '.$ojt->lname}}</td>
             <td>{{$ojt->school}}</td>
             <td class="center aligned">
               <a class="ui blue green icon button" href="/Admin/Trainee/{{$ojt->ojt_profile_id}}"><i class="file icon"></i></a>
@@ -129,7 +132,6 @@
 <script src="{{asset('Semantic-UI-CSS-master/calendar/dist/calendar.min.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-
   $('#schedule').dropdown();
 
   $('#add').click(function(){
@@ -142,6 +144,32 @@ $(document).ready(function(){
     });
     $('#schedule').dropdown('clear');
     $('#form form').form('reset');
+    $('#form form').form('add rule', 'username', {
+          rules: [
+          {
+            type   : 'empty', 
+          }, 
+          {
+            type   : 'length[8]', 
+          },
+          {
+            type   : 'maxLength[15]', 
+          },  
+          {
+            type   : 'checkUsername',
+            prompt : 'Username already taken.'
+          }
+          ]
+      }).form('add rule', 'password', {
+          rules: [
+          {
+            type   : 'empty', 
+          }, 
+          {
+            type   : 'length[8]', 
+          }, 
+          ]
+      });
   });
 
   $('.edit').click(function(){ 
@@ -226,6 +254,7 @@ $(document).ready(function(){
         },
         mname: {
           identifier: 'mname',
+          optional: true,
           rules: [
           {
             type   : 'empty',
@@ -293,43 +322,40 @@ $(document).ready(function(){
             prompt : 'Cannot be Empty.'
           }, 
           ]
-        },
+        }, 
         username: {
           identifier: 'username',
           rules: [
           {
-            type   : 'empty',
-            prompt : 'Cannot be Empty.'
+            type   : 'empty', 
           }, 
           {
-            type   : 'length[8]',
-            // prompt : 'Cannot be Empty.'
+            type   : 'length[8]', 
           },
           {
-            type   : 'maxLength[15]',
-            // prompt : 'Cannot be Empty.'
+            type   : 'maxLength[15]', 
           },  
           {
             type   : 'checkUsername',
             prompt : 'Username already taken.'
           }
           ]
-        },
+        }, 
         password: {
           identifier: 'password',
           rules: [
           {
-            type   : 'empty',
-            prompt : 'Cannot be Empty.'
+            type   : 'empty', 
           }, 
           {
-            type   : 'length[8]',
-            // prompt : 'Cannot be Empty.'
+            type   : 'length[8]', 
           }, 
           ]
-        },
+        }, 
       }
     });
+  
+  $('#table').DataTable();
 
 });
 </script>

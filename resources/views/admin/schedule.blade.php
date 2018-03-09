@@ -10,7 +10,10 @@
         <i class="add icon"></i>
         ADD
       </button>
-      <table class="ui celled table">
+      <br>
+      <br>
+      <br>
+      <table class="ui celled table" id="table">
         <thead>
           <tr>
           <th>Schedule</th>
@@ -130,6 +133,7 @@ $(document).ready(function(){
     $('#del input[name=id]').val($(this).val());
   });
 
+  $('#table').DataTable();
 });
 </script>
 @endsection

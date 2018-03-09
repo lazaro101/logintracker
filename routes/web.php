@@ -28,6 +28,8 @@ Route::get('/Admin/Trainee/{id}', ['uses' => 'AdminController@TraineeInfo']);
 Route::get('/Admin/TraineePdf', 'AdminController@TraineePdf');
 Route::get('/getTrainee','AdminController@getTrainee');
 Route::get('/checkUsername','AdminController@checkUsername');
+Route::post('/addLog','AdminController@addLog');
+Route::post('/delLog','AdminController@delLog');
 Route::post('/addTrainee','AdminController@addTrainee');
 Route::post('/editTrainee','AdminController@editTrainee');
 Route::post('/delTrainee','AdminController@delTrainee');

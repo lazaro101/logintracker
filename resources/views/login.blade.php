@@ -29,9 +29,10 @@
   $(document)
     .ready(function() { 
       setTimeout(function(){ $('.ui.login.message').transition('fade'); }, 5000);
+      
       $('.ui.form')
         .form({
-          inline: false,
+          inline: true,
           fields: {
             username: {
               identifier  : 'username',
@@ -40,10 +41,10 @@
                   type   : 'empty',
                   prompt : 'Please enter your Username'
                 },
-                {
-                  type   : 'maxLength[6]',
-                  prompt : 'Please enter a valid length'
-                }
+                // {
+                //   type   : 'maxLength[6]',
+                //   prompt : 'Please enter a valid length'
+                // }
               ]
             },
             password: {
@@ -53,25 +54,37 @@
                   type   : 'empty',
                   prompt : 'Please enter your password'
                 },
-                {
-                  type   : 'length[6]',
-                  prompt : 'Your password must be at least 6 characters'
-                }
+                // {
+                //   type   : 'length[6]',
+                //   prompt : 'Your password must be at least 6 characters'
+                // }
               ]
             }
           }
-        })
-      ;
-    })
-  ;
+        });
+       
+        $('h2').dblclick(function(event){
+          if(event.ctrlKey) {
+            if (event.altKey) { 
+                location.href = '/AdminLogin'; 
+            }
+          }
+      });
+    });
   </script>
 </head>
 <body>
 
 <div class="ui middle aligned center aligned grid">
-  <div class="row ui form">
-    <div class="eight wide column">
-    <form method="post" action="/doLogin">
+  <div class="column">
+    <h2 class="ui icon header">
+      <i class="user icon"></i>
+      <div class="content">
+        Log-in as Trainee
+      </div>
+    </h2>
+    <form method="post" action="/doLogin" class="ui form">
+    {{csrf_field()}}
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
@@ -79,38 +92,33 @@
             <input type="text" name="username" placeholder="Username" tabindex="1">
           </div>
         </div>
-        <button type="submit" class="ui fluid large teal submit button" value="login" name="submit">Login</button>
-      </div>
-    </div>
-      {{csrf_field()}}
-    <div class="eight wide column">
-      <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
             <input type="password" name="password" placeholder="Password" tabindex="2">
           </div>
         </div>
-        <button type="submit" class="ui fluid large teal submit button" value="logout" name="submit">Logout</button>
+        <div class="ui fluid buttons">
+          <button type="submit" class="ui large inverted green submit button" value="login" name="submit">Login</button> 
+          <button type="submit" class="ui large inverted red submit button" value="logout" name="submit">Logout</button>
+        </div>
       </div>
       <div class="ui error message" style="position: fixed; width: 50%; height: 150px; left: 50%; top:400px; margin: 0 0 0 -25%; z-index: -1"></div>
     </form>
-    </div>
   </div>
+</div>
 
 @if(Session::has('message'))
-<div style="position: fixed; width: 50%; height: 300px; left: 50%; top:100px; margin: 0 0 0 -25%; z-index: -1">
-  <div class="ui success message login">
-    <i class="close icon"></i>
+<div style="position: fixed; width: 50%; height: 300px; left: 50%; top:50px; margin: 0 0 0 -25%; z-index: -1">
+  <div class="ui {{ Session::get('type') }} message login">
+    <!-- <i class="close icon"></i> --> 
     <div class="header">
     {{ Session::get('message') }}
     </div> 
   </div>
 </div>
 @endif
-
-
-</div>
+ 
 
 </body>
 
