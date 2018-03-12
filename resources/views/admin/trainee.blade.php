@@ -12,8 +12,8 @@
       </button>
       <table class="ui celled table">
         <thead>
-          <tr><th>Name</th>
-          <th>School</th>
+          <tr><th class="six wide">Name</th>
+          <th class="six wide">School</th>
           <th class="four wide">Actions</th>
         </tr></thead>
         <tbody>
@@ -62,9 +62,9 @@
       <label>School</label>
       <input type="text" name="school">
     </div>
-    <div class="two fields">
+    <div class="three fields">
       <div class="field">
-        <label>Start Date:</label>  
+        <label>Start Date</label>  
         <div class="ui calendar" id="example2">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
@@ -73,7 +73,16 @@
         </div>
       </div>
       <div class="field">
-        <label>Hours to Render:</label>
+        <label>Schedule</label>
+        <select class="ui dropdown" name="schedule" id="schedule">
+          <option value="">Schedule</option>
+          @foreach($scheds as $sched)
+          <option value="{{$sched->schedule_id}}">{{date_create($sched->starttime)->format('h:i a').' - '.date_create($sched->endtime)->format('h:i a')}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="field">
+        <label>Hours to Render</label>
         <input type="text" name="hrs">
       </div>
     </div>
@@ -121,6 +130,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+  $('#schedule').dropdown();
+
   $('#add').click(function(){
     $('#form div.header').text('Add Trainee');
     $('#form form').trigger('reset').attr('action','/addTrainee');
@@ -129,6 +140,8 @@ $(document).ready(function(){
     $('#example2').calendar({
       type: 'date'
     });
+    $('#schedule').dropdown('clear');
+    $('#form form').form('reset');
   });
 
   $('.edit').click(function(){ 
@@ -137,6 +150,7 @@ $(document).ready(function(){
     $('#example2').calendar({
       type: 'date'
     });
+    $('#form form').form('reset');
     $.ajax({
       url : '/getTrainee',
       type : 'get',
@@ -148,6 +162,7 @@ $(document).ready(function(){
         $('#form form input[name=lname]').val(response.lname);
         $('#form form input[name=school]').val(response.school);
         $('#form form input[name=hrs]').val(response.render_hrs);
+        $('#schedule').dropdown('set selected',response.schedule_id);
         $('#form #example2').calendar('set date',response.start_date);
       },
       complete:function(){
@@ -161,6 +176,158 @@ $(document).ready(function(){
     $('#del').modal('show');
     $('#del input[name=id]').val($(this).val());
   });
+
+  $('#form .positive.button').click(function(){
+    if ($('#form form').form('is valid') == false) {
+      $('#form form').form('validate form');
+      return false
+    }
+    return true;
+  });
+
+  $.fn.form.settings.rules.checkUsername = function(value) { //-----------duplicate -------------//
+    var res = true;
+    $.ajax
+    ({
+      async : false,
+      url: '/checkUsername',
+      type : "get",
+      data : {"value" : value},
+      dataType: "json",
+      success: function(data) {
+          if (data.length > 0) {
+            res = false;
+          } else {
+            res = true;
+          }
+      }
+    });
+    return res;
+  };
+
+  $('.ui.form')
+    .form({
+      inline: true,
+      fields: {  
+        fname: {
+          identifier: 'fname',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          },
+          {
+            type   : 'maxLength[25]',
+            // prompt : 'Cannot be Empty.'
+          },
+          ]
+        },
+        mname: {
+          identifier: 'mname',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          },
+          {
+            type   : 'maxLength[25]',
+            // prompt : 'Cannot be Empty.'
+          },
+          ]
+        },
+        lname: {
+          identifier: 'lname',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          },
+          {
+            type   : 'maxLength[25]',
+            // prompt : 'Cannot be Empty.'
+          },
+          ]
+        },
+        school: {
+          identifier: 'school',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          },
+          {
+            type   : 'maxLength[155]',
+            // prompt : 'Cannot be Empty.'
+          },
+          ]
+        },
+        hrs: {
+          identifier: 'hrs',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          },
+          {
+            type   : 'integer[1..1000]',
+            prompt : 'Invalid value.'
+          }, 
+          ]
+        },
+        startdate: {
+          identifier: 'startdate',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          }, 
+          ]
+        },
+        schedule: {
+          identifier: 'schedule',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          }, 
+          ]
+        },
+        username: {
+          identifier: 'username',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          }, 
+          {
+            type   : 'length[8]',
+            // prompt : 'Cannot be Empty.'
+          },
+          {
+            type   : 'maxLength[15]',
+            // prompt : 'Cannot be Empty.'
+          },  
+          {
+            type   : 'checkUsername',
+            prompt : 'Username already taken.'
+          }
+          ]
+        },
+        password: {
+          identifier: 'password',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Cannot be Empty.'
+          }, 
+          {
+            type   : 'length[8]',
+            // prompt : 'Cannot be Empty.'
+          }, 
+          ]
+        },
+      }
+    });
 
 });
 </script>

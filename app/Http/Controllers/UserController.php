@@ -10,11 +10,7 @@ use App\OjtLogs;
 
 class UserController extends Controller
 {
-    public function login(){
-    	// Users::insert([
-    	// 	'username' => 'lolo',
-    	// 	'password' => bcrypt('lolo'),
-    	// ]);
+    public function login(){ 
     	return view('login');
     }
     public function showAdminLogin(){
@@ -34,7 +30,7 @@ class UserController extends Controller
                 return redirect('/')->with('message','Success!');
                 }
                 Auth::logout(); 
-                return redirect('/')->with('message','Existing!');
+                return redirect('/')->with('message','Failed!');
             } else {
                 $log = OjtLogs::where('ojt_profile_id',Auth::user()->ojt_profile_id)->orderBy('dtime_in','DESC')->limit(1);
                 if ($log->first()->dtime_out == null) {
@@ -43,11 +39,11 @@ class UserController extends Controller
                     return redirect('/')->with('message','Success!');
                 }
                 Auth::logout(); 
-                return redirect('/')->with('message','Existing!');
+                return redirect('/')->with('message','Failed!');
             }
              
         }
-        return redirect('/');
+        return redirect('/')->with('message','No matching Login!');
     }
     public function doLoginAdmin(Request $req){
         if(Auth::attempt(['username'=> $req->username,'password'=> $req->password, 'usertype' => 1])){

@@ -39,16 +39,17 @@
 
   <div class="ui fixed inverted menu">
     <div class="ui container">
-      <a href="/Admin" class="header item">
-        <!-- <img class="logo" src="assets/images/logo.png"> -->
+      <a href="/Admin" class="header item"> 
         Login Tracker
       </a>
-      <a href="/Admin" class="item">Home</a>
-      <a href="/Admin/Schedule" class="item">Schedule</a>
+      <!-- <a href="/Admin" class="item">Home</a> -->
       <a href="/Admin/Trainee" class="item">Trainee</a>
+      <a href="/Admin/Schedule" class="item">Schedule</a>
       <a href="/Admin/Reports" class="item">Reports</a>
-
-      <a href="/logout" class="right menu item">Logout</a>
+      <div class="right menu">
+        <a href="/Users" class="item">Admin Users</a>
+        <a href="/logout" class="item">Logout</a>
+      </div>
     </div>
   </div>
 

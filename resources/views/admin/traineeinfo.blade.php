@@ -45,6 +45,7 @@
 	      	<div id="project">
 		        <div><span>Name:</span> {{$info->fname.' '.$info->mname.' '.$info->lname}}</div>
 		        <div><span>School:</span> {{$info->school}}</div>
+		        <div><span>Schedule:</span> {{date_create($info->schedule->starttime)->format('h:i a').' - '.date_create($info->schedule->endtime)->format('h:i a')}}</div>
 		        <div><span>Hours to Render:</span> {{$info->render_hrs}} hrs</div>
 		        <div><span>Start Date:</span> {{date_create($info->start_date)->format('M d, Y')}}</div> 
 	      	</div>
@@ -77,11 +78,9 @@
 						@php
 							$dteStart = new DateTime($log->dtime_in); 
 							$dteEnd   = new DateTime($log->dtime_out);
-							$dteDiff  = $dteStart->diff($dteEnd); 
-							$timestamp = strtotime("11:00:00"."+"."21:00:00");
-							$endTime = date("H:i:s", $timestamp);
+							$dteDiff  = $dteStart->diff($dteEnd);  
 						@endphp
-						<td>{{$endTime}}</td>
+						<td>{{$dteStart->format("H:i")}}</td>
 					</tr>
 					@endforeach
 				</tbody>

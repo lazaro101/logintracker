@@ -25,9 +25,16 @@ Route::get('/Admin/Schedule','AdminController@Schedule');
 Route::get('/Admin/Trainee','AdminController@Trainee');
 Route::get('/Admin/Trainee/{id}', ['uses' => 'AdminController@TraineeInfo']);
 Route::get('/getTrainee','AdminController@getTrainee');
+Route::get('/checkUsername','AdminController@checkUsername');
 Route::post('/addTrainee','AdminController@addTrainee');
 Route::post('/editTrainee','AdminController@editTrainee');
 Route::post('/delTrainee','AdminController@delTrainee');
+
+Route::get('/Admin/Schedule','AdminController@Schedule');
+Route::get('/getSchedule','AdminController@getSchedule');
+Route::post('/addSchedule','AdminController@addSchedule');
+Route::post('/editSchedule','AdminController@editSchedule');
+Route::post('/delSchedule','AdminController@delSchedule');
 
 
 Route::get('/Admin/Reports','AdminController@Reports');

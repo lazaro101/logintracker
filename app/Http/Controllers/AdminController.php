@@ -17,14 +17,38 @@ class AdminController extends Controller
     }
 
     public function admin(){ 
-    	return view('admin.admin');
+    	// return view('admin.admin');
+        return redirect('/Admin/Trainee');
     }
 
 
     public function Schedule(){
-
-    	return view('admin.schedule');
+        $scheds = Schedule::where('deleted',0)->get();
+    	return view('admin.schedule',compact('scheds'));
     }
+    public function getSchedule(Request $req){
+        $var = Schedule::where('schedule_id',$req->id)->first();
+        return response()->json($var);
+    }
+    public function addSchedule(Request $req){
+        Schedule::insert([
+            'starttime' => date_create($req->starttime)->format('H:i:s'),
+            'endtime' => date_create($req->endtime)->format('H:i:s')
+        ]);
+        return redirect('/Admin/Schedule');
+    }
+    public function editSchedule(Request $req){
+        Schedule::where('schedule_id',$req->id)->update([
+            'starttime' => date_create($req->starttime)->format('H:i:s'),
+            'endtime' => date_create($req->endtime)->format('H:i:s')
+        ]);
+        return redirect('/Admin/Schedule');
+    }
+    public function delSchedule(Request $req){
+        Schedule::where('schedule_id',$req->id)->update([ 'deleted' => 1 ]);
+        return redirect('/Admin/Schedule');
+    }
+
 
     public function TraineeInfo($id){
     	$info = OjtProfile::where('ojt_profile_id',$id)->first();
@@ -32,18 +56,24 @@ class AdminController extends Controller
     	return view('admin.traineeinfo',compact('info','logs'));
     }
     public function Trainee(){
+        $scheds = Schedule::where('deleted',0)->get();
     	$ojts = OjtProfile::where('deleted',0)->get();
-    	return view('admin.trainee',compact('ojts'));
+    	return view('admin.trainee',compact('ojts','scheds'));
     }
     public function getTrainee(Request $req){
-    	$var = OjtProfile::where('ojt_profile_id',$req->id)->first();
-    	return response()->json($var);
+        $var = OjtProfile::where('ojt_profile_id',$req->id)->first();
+        return response()->json($var);
+    }
+    public function checkUsername(Request $req){
+        $var = Users::where('username',$req->value)->get();
+        return response()->json($var);
     }
     public function addTrainee(Request $req){
     	$opid = OjtProfile::insertGetId([
     		'fname' => $req->fname ,
     		'mname' => $req->mname ,
-    		'lname' => $req->lname ,
+            'lname' => $req->lname ,
+    		'schedule_id' => $req->schedule ,
     		'school' => $req->school ,
     		'render_hrs' => $req->hrs ,
     		'start_date' => date_create($req->startdate)->format('Y-m-d'),
