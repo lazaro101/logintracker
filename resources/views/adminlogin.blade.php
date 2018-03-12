@@ -26,42 +26,52 @@
     }
   </style>
   <script>
-  // $(document)
-  //   .ready(function() {
-  //     $('.ui.form')
-  //       .form({
-  //         fields: {
-  //           email: {
-  //             identifier  : 'email',
-  //             rules: [
-  //               {
-  //                 type   : 'empty',
-  //                 prompt : 'Please enter your e-mail'
-  //               },
-  //               {
-  //                 type   : 'email',
-  //                 prompt : 'Please enter a valid e-mail'
-  //               }
-  //             ]
-  //           },
-  //           password: {
-  //             identifier  : 'password',
-  //             rules: [
-  //               {
-  //                 type   : 'empty',
-  //                 prompt : 'Please enter your password'
-  //               },
-  //               {
-  //                 type   : 'length[6]',
-  //                 prompt : 'Your password must be at least 6 characters'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     ;
-  //   })
-  // ;
+  $(document)
+    .ready(function() {
+      setTimeout(function(){ $('.ui.login.message').transition('fade'); }, 5000);
+      
+      $('.ui.form')
+        .form({
+          inline: true,
+          fields: {
+            username: {
+              identifier  : 'username',
+              rules: [
+                {
+                  type   : 'empty',
+                  // prompt : 'Please enter your e-mail'
+                },
+                // {
+                //   type   : 'email',
+                //   prompt : 'Please enter a valid e-mail'
+                // }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                // {
+                //   type   : 'length[6]',
+                //   prompt : 'Your password must be at least 6 characters'
+                // }
+              ]
+            }
+          }
+        });
+
+      $('h2').dblclick(function(event){
+        if(event.ctrlKey) {
+          if (event.altKey) { 
+              location.href = '/'; 
+          }
+        }
+      });
+
+    });
   </script>
 </head>
 <body>
@@ -89,13 +99,23 @@
             <input type="password" name="password" placeholder="Password" tabindex="2">
           </div>
         </div>
-        <button type="submit" class="ui fluid large teal submit button" value="logout" name="submit">Login</button>
+        <button type="submit" class="ui fluid large teal submit button" name="submit">Login</button>
       </div>
 
     </form>
   </div>
 </div>
 
+@if(Session::has('message'))
+<div style="position: fixed; width: 50%; height: 300px; left: 50%; top:50px; margin: 0 0 0 -25%; z-index: -1">
+  <div class="ui {{ Session::get('type') }} message login">
+    <!-- <i class="close icon"></i> --> 
+    <div class="header">
+    {{ Session::get('message') }}
+    </div> 
+  </div>
+</div>
+@endif
 
 </body>
 

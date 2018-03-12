@@ -10,7 +10,10 @@
         <i class="add icon"></i>
         ADD
       </button>
-      <table class="ui celled table">
+      <br>
+      <br>
+      <br>
+      <table class="ui celled table" id="table">
         <thead>
           <tr><th class="six wide">Name</th>
           <th class="six wide">School</th>
@@ -19,7 +22,7 @@
         <tbody>
           @foreach($ojts as $ojt)
           <tr>
-            <td>{{$ojt->fname.' '.$ojt->mname.' '.$ojt->lname}}</td>
+            <td>{{$ojt->fname.' '.substr($ojt->mname,0,1).' '.$ojt->lname}}</td>
             <td>{{$ojt->school}}</td>
             <td class="center aligned">
               <a class="ui blue green icon button" href="/Admin/Trainee/{{$ojt->ojt_profile_id}}"><i class="file icon"></i></a>
@@ -129,6 +132,7 @@
 <script src="{{asset('Semantic-UI-CSS-master/calendar/dist/calendar.min.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+  $('#schedule').dropdown();
 
   $('#schedule').dropdown();
 
@@ -142,11 +146,41 @@ $(document).ready(function(){
     });
     $('#schedule').dropdown('clear');
     $('#form form').form('reset');
+<<<<<<< HEAD
+=======
+    $('#form form').form('add rule', 'username', {
+          rules: [
+          {
+            type   : 'empty', 
+          }, 
+          {
+            type   : 'length[8]', 
+          },
+          {
+            type   : 'maxLength[15]', 
+          },  
+          {
+            type   : 'checkUsername',
+            prompt : 'Username already taken.'
+          }
+          ]
+      }).form('add rule', 'password', {
+          rules: [
+          {
+            type   : 'empty', 
+          }, 
+          {
+            type   : 'length[8]', 
+          }, 
+          ]
+      });
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
   });
 
   $('.edit').click(function(){ 
     $('#form div.header').text('Edit Trainee');
     $('#form form').trigger('reset').attr('action','/editTrainee');
+    $('#form form').form('remove fields', ['username', 'password']);
     $('#example2').calendar({
       type: 'date'
     });
@@ -178,9 +212,16 @@ $(document).ready(function(){
   });
 
   $('#form .positive.button').click(function(){
+<<<<<<< HEAD
     if ($('#form form').form('is valid') == false) {
       $('#form form').form('validate form');
       return false
+=======
+    $('body').addClass('scrolling');
+    if ($('#form form').form('is valid') == false) {
+      $('#form form').form('validate form');
+      return false;
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
     }
     return true;
   });
@@ -224,6 +265,10 @@ $(document).ready(function(){
         },
         mname: {
           identifier: 'mname',
+<<<<<<< HEAD
+=======
+          optional: true,
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
           rules: [
           {
             type   : 'empty',
@@ -291,11 +336,16 @@ $(document).ready(function(){
             prompt : 'Cannot be Empty.'
           }, 
           ]
+<<<<<<< HEAD
         },
+=======
+        }, 
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
         username: {
           identifier: 'username',
           rules: [
           {
+<<<<<<< HEAD
             type   : 'empty',
             prompt : 'Cannot be Empty.'
           }, 
@@ -306,17 +356,31 @@ $(document).ready(function(){
           {
             type   : 'maxLength[15]',
             // prompt : 'Cannot be Empty.'
+=======
+            type   : 'empty', 
+          }, 
+          {
+            type   : 'length[8]', 
+          },
+          {
+            type   : 'maxLength[15]', 
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
           },  
           {
             type   : 'checkUsername',
             prompt : 'Username already taken.'
           }
           ]
+<<<<<<< HEAD
         },
+=======
+        }, 
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
         password: {
           identifier: 'password',
           rules: [
           {
+<<<<<<< HEAD
             type   : 'empty',
             prompt : 'Cannot be Empty.'
           }, 
@@ -328,6 +392,19 @@ $(document).ready(function(){
         },
       }
     });
+=======
+            type   : 'empty', 
+          }, 
+          {
+            type   : 'length[8]', 
+          }, 
+          ]
+        }, 
+      }
+    });
+  
+  $('#table').DataTable();
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
 
 });
 </script>

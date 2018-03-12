@@ -14,6 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// Route::get('generate-pdf', 'AdminController@pdfview')->name('generate-pdf');
 
 Route::get('/Admin','AdminController@admin');
 Route::get('/AdminLogin','UserController@showAdminLogin');
@@ -24,8 +25,14 @@ Route::get('/Admin/Schedule','AdminController@Schedule');
 
 Route::get('/Admin/Trainee','AdminController@Trainee');
 Route::get('/Admin/Trainee/{id}', ['uses' => 'AdminController@TraineeInfo']);
+Route::get('/Admin/TraineePdf', 'AdminController@TraineePdf');
 Route::get('/getTrainee','AdminController@getTrainee');
 Route::get('/checkUsername','AdminController@checkUsername');
+<<<<<<< HEAD
+=======
+Route::post('/addLog','AdminController@addLog');
+Route::post('/delLog','AdminController@delLog');
+>>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
 Route::post('/addTrainee','AdminController@addTrainee');
 Route::post('/editTrainee','AdminController@editTrainee');
 Route::post('/delTrainee','AdminController@delTrainee');
