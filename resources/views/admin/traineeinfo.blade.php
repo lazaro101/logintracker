@@ -86,13 +86,7 @@
 							@endif
 						</td>
 						@php
-<<<<<<< HEAD
-							$dteStart = new DateTime($log->dtime_in); 
-							$dteEnd   = new DateTime($log->dtime_out);
-							$dteDiff  = $dteStart->diff($dteEnd);  
-						@endphp
-						<td>{{$dteStart->format("H:i")}}</td>
-=======
+
 							if($log->dtime_out != null){
 								$to_time = strtotime($log->dtime_out);
 								$from_time = strtotime($log->dtime_in);
@@ -107,7 +101,6 @@
 							}
 						@endphp 
 						<td class="center aligned"><button class="ui icon red small button dellog"><i class="trash icon"></i></button></td>
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
 					</tr>
 					@endforeach
 				</tbody>

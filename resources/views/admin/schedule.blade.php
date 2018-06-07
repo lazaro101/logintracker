@@ -10,14 +10,11 @@
         <i class="add icon"></i>
         ADD
       </button>
-<<<<<<< HEAD
-      <table class="ui celled table">
-=======
       <br>
       <br>
       <br>
       <table class="ui celled table" id="table">
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+ 
         <thead>
           <tr>
           <th>Schedule</th>
@@ -136,11 +133,8 @@ $(document).ready(function(){
     $('#del').modal('show');
     $('#del input[name=id]').val($(this).val());
   });
-
-<<<<<<< HEAD
-=======
-  $('#table').DataTable();
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+ 
+  $('#table').DataTable(); 
 });
 </script>
 @endsection

@@ -146,8 +146,7 @@ $(document).ready(function(){
     });
     $('#schedule').dropdown('clear');
     $('#form form').form('reset');
-<<<<<<< HEAD
-=======
+ 
     $('#form form').form('add rule', 'username', {
           rules: [
           {
@@ -174,7 +173,7 @@ $(document).ready(function(){
           }, 
           ]
       });
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+ 
   });
 
   $('.edit').click(function(){ 
@@ -212,16 +211,11 @@ $(document).ready(function(){
   });
 
   $('#form .positive.button').click(function(){
-<<<<<<< HEAD
-    if ($('#form form').form('is valid') == false) {
-      $('#form form').form('validate form');
-      return false
-=======
+ 
     $('body').addClass('scrolling');
     if ($('#form form').form('is valid') == false) {
       $('#form form').form('validate form');
       return false;
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
     }
     return true;
   });
@@ -265,10 +259,8 @@ $(document).ready(function(){
         },
         mname: {
           identifier: 'mname',
-<<<<<<< HEAD
-=======
+ 
           optional: true,
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
           rules: [
           {
             type   : 'empty',
@@ -336,27 +328,13 @@ $(document).ready(function(){
             prompt : 'Cannot be Empty.'
           }, 
           ]
-<<<<<<< HEAD
-        },
-=======
+ 
         }, 
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
         username: {
           identifier: 'username',
           rules: [
           {
-<<<<<<< HEAD
-            type   : 'empty',
-            prompt : 'Cannot be Empty.'
-          }, 
-          {
-            type   : 'length[8]',
-            // prompt : 'Cannot be Empty.'
-          },
-          {
-            type   : 'maxLength[15]',
-            // prompt : 'Cannot be Empty.'
-=======
+
             type   : 'empty', 
           }, 
           {
@@ -364,35 +342,19 @@ $(document).ready(function(){
           },
           {
             type   : 'maxLength[15]', 
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
           },  
           {
             type   : 'checkUsername',
             prompt : 'Username already taken.'
           }
           ]
-<<<<<<< HEAD
-        },
-=======
+
         }, 
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
         password: {
           identifier: 'password',
           rules: [
           {
-<<<<<<< HEAD
-            type   : 'empty',
-            prompt : 'Cannot be Empty.'
-          }, 
-          {
-            type   : 'length[8]',
-            // prompt : 'Cannot be Empty.'
-          }, 
-          ]
-        },
-      }
-    });
-=======
+
             type   : 'empty', 
           }, 
           {
@@ -404,7 +366,6 @@ $(document).ready(function(){
     });
   
   $('#table').DataTable();
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
 
 });
 </script>

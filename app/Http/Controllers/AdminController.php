@@ -68,11 +68,9 @@ class AdminController extends Controller
     }
     public function Trainee(){
         $scheds = Schedule::where('deleted',0)->get();
-<<<<<<< HEAD
-    	$ojts = OjtProfile::where('deleted',0)->get();
-=======
+ 
     	$ojts = OjtProfile::where('deleted',0)->orderBy('ojt_profile_id','DESC')->get();
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+ 
     	return view('admin.trainee',compact('ojts','scheds'));
     }
     public function getTrainee(Request $req){
@@ -82,8 +80,7 @@ class AdminController extends Controller
     public function checkUsername(Request $req){
         $var = Users::where('username',$req->value)->get();
         return response()->json($var);
-<<<<<<< HEAD
-=======
+  
     }
     public function addLog(Request $req){
     	echo $log = OjtLogs::whereDate('dtime_in',date_create($req->in)->format('Y-m-d'))->first();
@@ -101,7 +98,7 @@ class AdminController extends Controller
     public function delLog(Request $req){
     	echo OjtLogs::where('ojt_profile_id',$req->id)->whereDate('dtime_in',date_create($req->date)->format('Y-m-d'))->whereTime('dtime_in','Like','%'.date_create($req->date)->format('H:i').'%')->delete(); 
     	return redirect('/Admin/Trainee/'.$req->id);
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+ 
     }
     public function addTrainee(Request $req){
     	$opid = OjtProfile::insertGetId([

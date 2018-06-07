@@ -50,15 +50,11 @@
       <!-- <a href="/Admin" class="item">Home</a> -->
       <a href="/Admin/Trainee" class="item">Trainee</a>
       <a href="/Admin/Schedule" class="item">Schedule</a>
-<<<<<<< HEAD
-      <a href="/Admin/Reports" class="item">Reports</a>
-      <div class="right menu">
-        <a href="/Users" class="item">Admin Users</a>
-=======
+ 
       <!-- <a href="/Admin/Reports" class="item">Reports</a> -->
       <div class="right menu">
         <!-- <a href="/Users" class="item">Admin Users</a> -->
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+ 
         <a href="/logout" class="item">Logout</a>
       </div>
     </div>
