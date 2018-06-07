@@ -29,16 +29,11 @@
   $(document)
     .ready(function() { 
       setTimeout(function(){ $('.ui.login.message').transition('fade'); }, 5000);
-<<<<<<< HEAD
-      $('.ui.form')
-        .form({
-          inline: false,
-=======
+ 
       
       $('.ui.form')
         .form({
-          inline: true,
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+          inline: true, 
           fields: {
             username: {
               identifier  : 'username',
@@ -47,17 +42,11 @@
                   type   : 'empty',
                   prompt : 'Please enter your Username'
                 },
-<<<<<<< HEAD
-                {
-                  type   : 'maxLength[6]',
-                  prompt : 'Please enter a valid length'
-                }
-=======
+ 
                 // {
                 //   type   : 'maxLength[6]',
                 //   prompt : 'Please enter a valid length'
-                // }
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+                // } 
               ]
             },
             password: {
@@ -67,19 +56,7 @@
                   type   : 'empty',
                   prompt : 'Please enter your password'
                 },
-<<<<<<< HEAD
-                {
-                  type   : 'length[6]',
-                  prompt : 'Your password must be at least 6 characters'
-                }
-              ]
-            }
-          }
-        })
-      ;
-    })
-  ;
-=======
+ 
                 // {
                 //   type   : 'length[6]',
                 //   prompt : 'Your password must be at least 6 characters'
@@ -96,8 +73,7 @@
             }
           }
       });
-    });
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+    }); 
   </script>
 </head>
 <body>
@@ -135,27 +111,14 @@
   </div>
 </div>
 
-@if(Session::has('message'))
-<<<<<<< HEAD
+@if(Session::has('message')) 
 <div style="position: fixed; width: 50%; height: 300px; left: 50%; top:100px; margin: 0 0 0 -25%; z-index: -1">
   <div class="ui success message login">
-    <i class="close icon"></i>
-=======
-<div style="position: fixed; width: 50%; height: 300px; left: 50%; top:50px; margin: 0 0 0 -25%; z-index: -1">
-  <div class="ui {{ Session::get('type') }} message login">
-    <!-- <i class="close icon"></i> --> 
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+    <i class="close icon"></i> 
     <div class="header">
     {{ Session::get('message') }}
     </div> 
-  </div>
-<<<<<<< HEAD
-</div>
-@endif
-
-
-=======
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+  </div> 
 </div>
 @endif
  

@@ -32,11 +32,11 @@ class UserController extends Controller
                     return redirect('/')->with('message','Logged in : '.$datelog)->with('type','success');
                 }
                 Auth::logout(); 
-<<<<<<< HEAD
-                return redirect('/')->with('message','Failed!');
-=======
+
+                // return redirect('/')->with('message','Failed!');
+
                 return redirect('/')->with('message','Logged in : '.$datelog)->with('type','info');
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+
             } else {
                 $log = OjtLogs::where('ojt_profile_id',Auth::user()->ojt_profile_id)->orderBy('dtime_in','DESC')->limit(1);
                 $datelog = date_create($log->first()->dtime_in)->format('M d, Y - h:i a');
@@ -46,19 +46,19 @@ class UserController extends Controller
                     return redirect('/')->with('message','Logged out : '.$datelog)->with('type','success');
                 }
                 Auth::logout(); 
-<<<<<<< HEAD
-                return redirect('/')->with('message','Failed!');
-            }
+
+        //         return redirect('/')->with('message','Failed!');
+        //     }
              
-        }
-        return redirect('/')->with('message','No matching Login!');
-=======
+        // }
+        // return redirect('/')->with('message','No matching Login!');
+
                 return redirect('/')->with('message','Logged out : '.$datelog)->with('type','info');
             }
              
         }
         return redirect('/')->with('message','No matching Login!')->with('type','error');
->>>>>>> 22051e6b020d152546c743cb1fe437358bd03346
+
     }
     public function doLoginAdmin(Request $req){
         if(Auth::attempt(['username'=> $req->username,'password'=> $req->password, 'usertype' => 1])){
